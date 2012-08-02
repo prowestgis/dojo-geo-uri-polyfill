@@ -2,7 +2,8 @@ define([
     "dojo/has",
     "dojo/_base/Deferred",
     "dojo/on",
-    "dojo/dom-attr"
+    "dojo/dom-attr",
+    "dojo/sniff"
     ],
     function(has, Deferred, on, domAttr) {
 
@@ -19,16 +20,9 @@ define([
             return match ? match[1] : false;
         });
 
-        has.add("android", function(global, document, element) {
-            var re = /Android ([\d.]+)$/i;
-            var match = re.exec(navigator.userAgent);
-
-            return match ? match[1] : false;
-        });
-
         // Ref: http://geouri.org/applications/
         has.add("geo-uri-scheme", function(global, document, element) {
-            return (has("android") >= "2") || (has("midori") >= "1.3.6");
+            return (has("android") >= 2) || (has("midori") >= "1.3.6");
         });
 
         function isZero(x) {
