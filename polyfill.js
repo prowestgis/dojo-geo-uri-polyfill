@@ -2,10 +2,9 @@ define([
     "dojo/has",
     "dojo/_base/Deferred",
     "dojo/on",
-    "dojo/dom-attr",
-    "pwa/geo"
+    "dojo/dom-attr"
     ],
-    function(has, Deferred, on, domAttr, geo) {
+    function(has, Deferred, on, domAttr) {
 
         // Add a test to detect support for the geo: URI scheme[0]. Known support
         //
