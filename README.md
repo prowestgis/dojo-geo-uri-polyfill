@@ -11,7 +11,7 @@ handler to intercept an clicks to anchor elements with a "geo:" URI scheme.
 
 Currently, only Google Maps is used for the service provider.  We implement the Android intent interface, so
 that query strings can be attatched to the URI and undefined (or zero) latitude and longitude values are
-interpreted as "current position".
+interpreted as "current position" and try to use the Geolocation API to fetch the user's position.
 
 Example
 -------
