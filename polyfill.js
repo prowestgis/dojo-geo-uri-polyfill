@@ -87,7 +87,7 @@ define([
 
                 // Parse the p-array. The crs and uncp MUST come before anything else.  We only care about 
                 // the crs field and throw an exception if it is set and not equal to wgs84.
-                for (var idx = 0; i < p.length; idx++) {
+                for (var idx = 0; idx < p.length; idx++) {
                     if (p[idx].indexOf("crs=") === 0) {
                         var crslabel = p[idx].split("=")[1];
                         if (crslabel !== "wgs84") {
