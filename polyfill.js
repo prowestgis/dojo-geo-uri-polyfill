@@ -1,6 +1,6 @@
 define([
     "dojo/has",
-    "dojo/_base/Deferred",
+    "dojo/Deferred",
     "dojo/on",
     "dojo/dom-attr",
     "dojo/sniff"
@@ -43,14 +43,14 @@ define([
             var deferred = new Deferred();
             if (navigator && navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    deferred.callback(position);
+                    deferred.resolve(position);
                 },
                 function(e) {
-                    deferred.errback(arguments);
+                    deferred.reject(arguments);
                 });
             }
             else {
-                deferred.errback();
+                deferred.reject();
             }
             
             return deferred.promise;
@@ -106,7 +106,7 @@ define([
                 // Android Extension: if the lat/lon is equal to 0,0 or undefined, then assume we mean 
                 // "current location". The RFC defines "0" === "-0".
                 if (isZero(latitude) && isZero(longitude)) {
-                    Deferred.when(geolocation(), function(geo) {
+                    geolocation().then(function(geo) {
                         openGoogleMaps(geo.coords.latitude, geo.coords.longitude, queryString);
                     });
                 }
