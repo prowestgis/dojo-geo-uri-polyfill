@@ -3,7 +3,8 @@ define([
     "dojo/Deferred",
     "dojo/on",
     "dojo/dom-attr",
-    "dojo/sniff"
+    "dojo/sniff",
+    "dojo/query",
     ],
     function(has, Deferred, on, domAttr) {
 
@@ -32,7 +33,7 @@ define([
         function openGoogleMaps(lat, lon, q) {
             var extra = (q && q.length > 0) ? ("&" + q) : "";
             var latlon = lat + "," + lon;
-            window.location.href = "http://maps.google.com?near=" + latlon + "&ll=" + latlon + extra;
+            window.open("http://maps.google.com?near=" + latlon + "&ll=" + latlon + extra, "_blank");
         }
 
         function _exception_toString() {
@@ -52,16 +53,13 @@ define([
             else {
                 deferred.reject();
             }
-            
             return deferred.promise;
         }
 
         // Test for geo: support and add a polyfill if it's not available. Only support wgs84 crs
         if (!has("geo-uri-scheme")) {
-            
             // geo: polyfill
-            on(document, "a[href^='geo:']:click", function(e) {
-                
+            on(document, on.selector("a[href^='geo:']","click"), function(e) {
                 // Prevent any default behavior
                 e.preventDefault();
 
